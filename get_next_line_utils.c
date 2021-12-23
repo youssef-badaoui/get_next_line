@@ -2,9 +2,14 @@
 
 int is_it_end(char *str)
 {
-	while(str)
+	int	i;
+
+	i = 0;
+	if(!str)
+		return (0);
+	while(str[i] != 0)
 	{
-		if(str[i] = '\n')
+		if(str[i] == '\n')
 			return (1);
 		i++;
 	}
@@ -13,22 +18,28 @@ int is_it_end(char *str)
 
 int ft_strlen(char *str)
 {
-	while(str && str!='\n')
+	int	i;
+
+	i = 0;
+	while(str && str[i] != '\n')
 		i++;
 	return (i);
 }
 
 char *get_line(char *buffer)
 {
+	int	i;
 	char *line;
 
-	line = malloc(ft_strlen(buffer);
+	i = 0;
+	line = malloc(ft_strlen(buffer + 2));
 	while(buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
 	}
-	line[i] = 
+	line[i++] = '\n';
+	line[i++] = '\0';
 	return (line);
 }
 
@@ -55,8 +66,10 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		sizep;
 
 	i = 0;
-	if(!s1 || !s2)
-		return 0;
+	if(!s1 )
+		return ((char*)s2);
+	if(!s2)
+		return((char*)s1);
 	size1 = ft_strlen((char *)s1);
 	size2 = ft_strlen((char *)s2);
 	sizep = size1 + size2;
