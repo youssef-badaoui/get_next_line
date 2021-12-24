@@ -7,21 +7,24 @@ int is_it_end(char *str)
 	i = 0;
 	if(!str)
 		return (0);
-	while(str[i] != 0)
+	while(str[i])
 	{
-		if(str[i] == '\n')
+		if(str[i] == '\n' || str[i] == 0)
 			return (1);
 		i++;
 	}
 	return (0);
 }
-
+/*int endof(char *str)
+{
+	while(*str
+}*/
 int ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str && str[i] != '\n')
+	while(str[i]!= 0)
 		i++;
 	return (i);
 }
@@ -57,7 +60,7 @@ char *get_rest(char *buffer)
 	return (0);	
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	char	*p;
@@ -66,10 +69,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	int		sizep;
 
 	i = 0;
-	if(!s1 )
-		return ((char*)s2);
+	if(!s1)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
 	if(!s2)
-		return((char*)s1);
+		return ((char *)s1);
 	size1 = ft_strlen((char *)s1);
 	size2 = ft_strlen((char *)s2);
 	sizep = size1 + size2;

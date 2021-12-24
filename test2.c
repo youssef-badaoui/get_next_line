@@ -18,9 +18,10 @@ int is_it_end(char *str)
 
 int main()
 {
-	char *str;
+	char str[] = ""; 
 
-	str = malloc(5);
+//	str = malloc(5);
+
 	printf("%d",is_it_end(str));
+}	:q
 
-}	

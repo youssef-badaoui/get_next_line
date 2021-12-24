@@ -2,6 +2,10 @@
 
 int main()
 {
-	int fd = open("text.txt", O_RDWR);
-	printf("%s", get_next_line(fd));
+	int fd = open("text", O_RDWR);
+		printf("%s", get_next_line(fd));
+	//	printf("%s", get_next_line(fd));
+	//	printf("%s", get_next_line(fd));
+	//	printf("%s", get_next_line(fd));
+	//	printf("%s", get_next_line(fd));
 }
