@@ -24,6 +24,11 @@ char *read_intel(int fd, int SIZE)
 	{
 		n = read(fd, str, SIZE);
 		buffer = ft_strjoin(buffer, str);
+		if(n < 1)
+		{
+			free(str);
+			return buffer;
+		}
 	}
 	free(str);
 	return (buffer);

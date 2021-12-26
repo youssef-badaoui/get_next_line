@@ -9,16 +9,13 @@ int is_it_end(char *str)
 		return (0);
 	while(str[i])
 	{
-		if(str[i] == '\n' || str[i] == 0)
+		if(str[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
-/*int endof(char *str)
-{
-	while(*str
-}*/
+
 int ft_strlen(char *str)
 {
 	int	i;
