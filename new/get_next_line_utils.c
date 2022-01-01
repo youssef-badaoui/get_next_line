@@ -51,7 +51,7 @@ char	*ft_strdup(char *str)
 		i++;
 	}
 	ptr[i] = 0;
-	free(str);
+	//free(str);
 	return (ptr);
 }
 
@@ -77,7 +77,7 @@ char *get_rest(char *buffer)
 		i++;
 	}
 	rest = ft_strdup(rest);
-	free(buffer);
+	//free(buffer);
 	return (rest);
 }
 
