@@ -22,6 +22,8 @@ char    *get_intel(int fd, int size)
 
     buffer = NULL;
     str = (char *)malloc(size + 1);
+    if (!str)
+        return (0);
     str[0] = 0;
     n = 1;
     while(n > 0 && the_end(str) == 0)
@@ -32,7 +34,6 @@ char    *get_intel(int fd, int size)
             break;
         str[n] = '\0';
         buffer = ft_strjoin(buffer, str);
-        //printf("%s", buffer);
     }
     free(str);
     return buffer;
@@ -49,16 +50,12 @@ char    *get_next_line(int fd)
 		return (NULL);
 
    buffer =  get_intel(fd, BUFFER_SIZE);
-   //printf("%s\n", buffer);
    if(!buffer)
-    return NULL;
+    return rest;
 
-   
-   if(!get_line(buffer))
-    return NULL;
    line = ft_strjoin(rest, get_line(buffer));
    rest = get_rest(buffer);
-  free(buffer);
+   // free(buffer);
    return (line);
 }
 
@@ -68,12 +65,12 @@ char    *get_next_line(int fd)
 // int main()
 // {
 // 	//char str[] = "hello \n youssef";
-//    int fd = open("multiple_nlx5", O_RDWR);
-//     printf("%d\n", fd);
+//    int fd = open("41_with_nl", O_RDWR);
+//   //  printf("%d\n", fd);
 //     printf("%s", get_next_line(fd));
 // 	printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
+//     // printf("%s", get_next_line(fd));
+//     // printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+//     // printf("%s", get_next_line(fd));
 // }

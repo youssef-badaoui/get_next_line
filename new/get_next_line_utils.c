@@ -14,45 +14,28 @@ int ft_strlen(char *str)
 char *get_line(char *buffer)
 {
 	int	i;
+	int j;
 	char *line;
 	
-
-
 	i = 0;
-	line = malloc(ft_strlen(buffer) + 2);
-	while(buffer[i] != '\n' && buffer[i] !=  '\0')
-	{
-		line[i] = buffer[i];
+	j = 0;
+	if(!buffer)
+		return NULL;
+	while(buffer[i] && buffer[i] != '\n')
 		i++;
+	if (buffer[i] == '\n')
+		i++;
+	line = (char *)malloc(i + 1);
+	if (!line)
+		return (line);
+	while(j < i)
+	{
+		line[j] = buffer[j];
+		j++;
 	}
-	if(buffer[i] == '\n')
-		line[i++] = '\n';
 	line[i] = '\0';
 	//free(buffer);
-
 	return (line);
-}
-
-
-char	*ft_strdup(char *str)
-{
-	int		size;
-	char	*ptr;
-	int		i;
-
-	i = 0;
-	size = ft_strlen(str);
-	ptr = (char *)malloc(size + 1);
-	if (!ptr)
-		return (0);
-	while (i < size)
-	{
-		ptr[i] = str[i];
-		i++;
-	}
-	ptr[i] = 0;
-	//free(str);
-	return (ptr);
 }
 
 char *get_rest(char *buffer)
@@ -65,25 +48,21 @@ char *get_rest(char *buffer)
 		NULL;
 	i = 0;
 	j = 0;
-	rest = malloc(ft_strlen(buffer));
+	while(buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	rest = malloc(ft_strlen(buffer) - i + 1);
 	while(buffer[i])
 	{
-		if(buffer[i] == '\n')
-			{
-				i++;
-				rest[j] = buffer[i];
-				j++;
-			}
+		rest[j] = buffer[i];
 		i++;
+		j++;
 	}
-	rest = ft_strdup(rest);
-	//free(buffer);
+	rest[j] = '\0';
+	free(buffer);
 	return (rest);
 }
-
-
-
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -95,11 +74,11 @@ char	*ft_strjoin(char *s1, char *s2)
 
 
 	i = 0;
-	if(!s2)
-		{
-            s2 = malloc(1);
-            s2[0] = '\0';
-        }
+	// if(!s2)
+	// 	{
+    //         s2 = malloc(1);
+    //         s2[0] = '\0';
+    //     }
    if(!s1)
         {
             s1 = malloc (1);
@@ -119,8 +98,8 @@ char	*ft_strjoin(char *s1, char *s2)
 			p[i + size1] = s2[i];
 		i++;
 	}
-    free(s1);
-    //free(s2);
+   		free(s1);
+  //free(s2);
 	p[i] = 0;
 	return (p);
 }
