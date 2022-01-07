@@ -34,7 +34,6 @@ char *get_line(char *buffer)
 		j++;
 	}
 	line[i] = '\0';
-	//free(buffer);
 	return (line);
 }
 
@@ -45,7 +44,7 @@ char *get_rest(char *buffer)
 	char *rest;
 
 	if(!buffer)
-		NULL;
+		return (NULL);
 	i = 0;
 	j = 0;
 	while(buffer[i] && buffer[i] != '\n')
@@ -53,6 +52,8 @@ char *get_rest(char *buffer)
 	if (buffer[i] == '\n')
 		i++;
 	rest = malloc(ft_strlen(buffer) - i + 1);
+	// if(!rest || buffer[i+1] == 0)
+	// 	return NULL;
 	while(buffer[i])
 	{
 		rest[j] = buffer[i];
@@ -60,7 +61,6 @@ char *get_rest(char *buffer)
 		j++;
 	}
 	rest[j] = '\0';
-	free(buffer);
 	return (rest);
 }
 
@@ -74,16 +74,17 @@ char	*ft_strjoin(char *s1, char *s2)
 
 
 	i = 0;
-	// if(!s2)
-	// 	{
-    //         s2 = malloc(1);
-    //         s2[0] = '\0';
-    //     }
-   if(!s1)
-        {
-            s1 = malloc (1);
-            s1[0] = '\0';
-        }
+	if(!s2)
+	{
+            s2 = malloc(1);
+            s2[0] = '\0';
+    }
+   if(s1 == NULL)
+    {
+    //    return(s2);
+	    s1 = malloc (1);
+        s1[0] = '\0';
+    }
 	size1 = ft_strlen((char *)s1);
 	size2 = ft_strlen((char *)s2);
 	sizep = size1 + size2;
@@ -98,8 +99,8 @@ char	*ft_strjoin(char *s1, char *s2)
 			p[i + size1] = s2[i];
 		i++;
 	}
-   		free(s1);
-  //free(s2);
+   	// free(s1);
+  	// free(s2);
 	p[i] = 0;
 	return (p);
 }

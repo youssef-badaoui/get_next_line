@@ -22,11 +22,11 @@
 # include <string.h>
 
 char	*get_next_line(int fd);
-int the_end(char *str);
-char    *get_intel(int fd, int size);
-int ft_strlen(char *str);
-char *get_line(char *buffer);
-char *get_rest(char *buffer);
+int     the_end(char *str);
+char    *get_intel(int fd, int size, char *buffer);
+int     ft_strlen(char *str);
+char    *get_line(char *buffer);
+char    *get_rest(char *buffer);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 #endif
