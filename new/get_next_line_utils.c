@@ -10,7 +10,6 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-
 char *get_line(char *buffer)
 {
 	int	i;
@@ -33,7 +32,7 @@ char *get_line(char *buffer)
 		line[j] = buffer[j];
 		j++;
 	}
-	line[i] = '\0';
+	line[j] = '\0';
 	return (line);
 }
 
@@ -70,18 +69,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		size2;
 	int		sizep;
 
-
 	i = 0;
-	if(!s2)
-	{
-            s2 = malloc(1);
-            s2[0] = '\0';
-    }
    if(s1 == NULL)
     {
 	    s1 = malloc(1);
         s1[0] = '\0';
     }
+	if(!s2)
+		return s1;
 	size1 = ft_strlen((char *)s1);
 	size2 = ft_strlen((char *)s2);
 	sizep = size1 + size2;

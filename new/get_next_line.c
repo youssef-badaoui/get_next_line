@@ -21,7 +21,6 @@ char    *get_intel(int fd, int size, char *buffer)
     char    *str;
     int      n;
 
-    // buffer = NULL;
     str = (char *)malloc(size + 1);
     if (!str)
         return (0);
@@ -30,7 +29,6 @@ char    *get_intel(int fd, int size, char *buffer)
     while(n > 0 && the_end(buffer) == 0)
     {
         n = read(fd, str, size);
-        //printf("%s", str);
         if(n <= 0)
             break;
         str[n] = '\0';
@@ -40,13 +38,13 @@ char    *get_intel(int fd, int size, char *buffer)
     return buffer;
 }
 
-
 char    *get_next_line(int fd)
 {
     static char    *rest;
     char *line;
-    char    *buffer = NULL;
+    char    *buffer;
 
+    buffer = NULL;
     if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
     if (rest != NULL)
@@ -59,9 +57,7 @@ char    *get_next_line(int fd)
         return (NULL);
     line = get_line(buffer);
     if (ft_strlen(buffer) > ft_strlen(line))
-    {
         rest = get_rest(buffer);
-    }
     free(buffer);
     return (line);
 }
