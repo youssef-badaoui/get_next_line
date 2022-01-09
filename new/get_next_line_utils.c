@@ -1,33 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/09 09:22:49 by ybadaoui          #+#    #+#             */
+/*   Updated: 2022/01/09 09:37:52 by ybadaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i]!= 0)
+	while (str[i] != 0)
 		i++;
 	return (i);
 }
 
-char *get_line(char *buffer)
+char	*get_line(char	*buffer)
 {
-	int	i;
-	int j;
-	char *line;
-	
+	int		i;
+	int		j;
+	char	*line;
+
 	i = 0;
 	j = 0;
-	if(!buffer)
-		return NULL;
-	while(buffer[i] && buffer[i] != '\n')
+	if (!buffer)
+		return (NULL);
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
 	line = (char *)malloc(i + 1);
 	if (!line)
 		return (line);
-	while(j < i)
+	while (j < i)
 	{
 		line[j] = buffer[j];
 		j++;
@@ -36,22 +48,22 @@ char *get_line(char *buffer)
 	return (line);
 }
 
-char *get_rest(char *buffer)
+char	*get_rest(char	*buffer)
 {
-	int i;
-	int j;
-	char *rest;
+	int		i;
+	int		j;
+	char	*rest;
 
-	if(!buffer)
+	if (!buffer)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while(buffer[i] && buffer[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
 	rest = malloc(ft_strlen(buffer) - i + 1);
-	while(buffer[i])
+	while (buffer[i])
 	{
 		rest[j] = buffer[i];
 		i++;
@@ -70,13 +82,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		sizep;
 
 	i = 0;
-   if(s1 == NULL)
-    {
-	    s1 = malloc(1);
-        s1[0] = '\0';
-    }
-	if(!s2)
-		return s1;
+	if (s1 == NULL)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
+	if (!s2)
+		return (s1);
 	size1 = ft_strlen((char *)s1);
 	size2 = ft_strlen((char *)s2);
 	sizep = size1 + size2;
@@ -91,7 +103,7 @@ char	*ft_strjoin(char *s1, char *s2)
 			p[i + size1] = s2[i];
 		i++;
 	}
-   	free(s1);
+	free(s1);
 	p[i] = 0;
 	return (p);
 }
