@@ -1,43 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 09:56:56 by ybadaoui          #+#    #+#             */
+/*   Updated: 2022/01/09 09:27:29 by ybadaoui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *strset(char *buffer)
+int	the_end(char *str)
 {
-	static char *rest;
-	char 		*tmp;
+	int	i;
 
-	tmp = buffer;
-	buffer = ft_strjoin(rest, get_line(buffer));
-	rest = get_rest(tmp);
-	return (buffer);
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-char *read_intel(int fd, int SIZE)
+char	*get_intel(int fd, int size, char *buffer)
 {
-	char	*buffer;
 	char	*str;
 	int		n;
 
-	str = malloc(SIZE);
-	buffer = NULL;
-	while(is_it_end(str) == 0)
+	str = (char *)malloc(size + 1);
+	if (!str)
+		return (0);
+	str[0] = 0;
+	n = 1;
+	while (n > 0 && the_end(buffer) == 0)
 	{
-		n = read(fd, str, SIZE);
+		n = read(fd, str, size);
+		if (n <= 0)
+			break ;
+		str[n] = '\0';
 		buffer = ft_strjoin(buffer, str);
-		if(n < 1)
-		{
-			free(str);
-			return buffer;
-		}
 	}
 	free(str);
 	return (buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *buffer;
+	static char	*rest;
+	char		*line;
+	char		*buffer;
 
-	buffer = read_intel(fd, BUFFER_SIZE);
-	return (strset(buffer));
+	buffer = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (rest != NULL)
+	{
+		buffer = ft_strjoin(rest, buffer);
+		rest = NULL;
+	}
+	buffer = get_intel(fd, BUFFER_SIZE, buffer);
+	if (buffer == NULL)
+		return (NULL);
+	line = get_line(buffer);
+	if (ft_strlen(buffer) > ft_strlen(line))
+		rest = get_rest(buffer);
+	free(buffer);
+	return (line);
 }

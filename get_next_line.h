@@ -6,7 +6,7 @@
 /*   By: ybadaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 08:24:02 by ybadaoui          #+#    #+#             */
-/*   Updated: 2021/12/24 10:51:42 by ybadaoui         ###   ########.fr       */
+/*   Updated: 2022/01/09 14:36:05 by ybadaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,19 @@
 # include <unistd.h>
 # include <string.h>
 
+typedef struct s_var {
+	int	i;
+	int	j;
+	int	size1;
+	int	size2;
+	int	sizep;
+}	t_var;
+
 char	*get_next_line(int fd);
-int is_it_end(char *str);
-int ft_strlen(char *str);
-char *get_line(char *buffer);
-char *get_rest(char *buffer);
+int		the_end(char *str);
+char	*get_intel(int fd, int size, char *buffer);
+size_t	ft_strlen(char *str);
+char	*get_line(char *buffer);
+char	*get_rest(char *buffer);
 char	*ft_strjoin(char *s1, char *s2);
 #endif
